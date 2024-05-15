@@ -50,7 +50,7 @@ function fakelib.create_player(player)
 			data.metadata = fakelib.create_metadata(player.metadata)
 		end
 		if fakelib.is_inventory(player.inventory) then
-			data.inventory = fakelib.create_inventory(player.inventory)
+			data.inventory = player.inventory
 		end
 		local size = 32
 		if data.inventory and type(player.wield_list) == "string" then
