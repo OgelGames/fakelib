@@ -12,7 +12,7 @@ local player_controls = {
 ----------------------------------------
 
 function fakelib.is_player(x)
-	if type(x) == "userdata" and x.get_player_name then
+	if type(x) == "userdata" and x.is_player and x:is_player() then
 		return true
 	elseif type(x) == "table" and getmetatable(x) == identifier then
 		return true
