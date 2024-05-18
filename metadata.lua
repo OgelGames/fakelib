@@ -15,10 +15,14 @@ function fakelib.is_metadata(x)
 	return false
 end
 
-function fakelib.create_metadata(meta)
+function fakelib.create_metadata(data)
 	local fields = {}
-	if meta and fakelib.is_metadata(meta) then
-		fields = meta:to_table().fields
+	if type(data) == "table" then
+		for k,v in pairs(data) do
+			if type(k) == "string" and type(v) == "string" then
+				fields[k] = v
+			end
+		end
 	end
 	return secure_table({fields = fields}, fake_metadata, identifier)
 end

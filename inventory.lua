@@ -15,18 +15,10 @@ function fakelib.is_inventory(x)
 	return false
 end
 
-function fakelib.create_inventory(inv)
+function fakelib.create_inventory(sizes)
 	local lists = {}
-	if inv and fakelib.is_inventory(inv) then
-		lists = inv:get_lists()
-		for listname in pairs(lists) do
-			local width = inv:get_width(listname)
-			if width > 0 then
-				lists[listname].width = width
-			end
-		end
-	elseif type(inv) == "table" then
-		for listname, size in pairs(inv) do
+	if type(sizes) == "table" then
+		for listname, size in pairs(sizes) do
 			if type(listname) == "string" and type(size) == "number" then
 				local list = {}
 				for i=1, size do

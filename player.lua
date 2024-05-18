@@ -20,50 +20,48 @@ function fakelib.is_player(x)
 	return false
 end
 
-function fakelib.create_player(player)
+function fakelib.create_player(options)
 	local data = {}
-	if type(player) == "string" then
-		data.name = player
-	elseif fakelib.is_player(player) then
-		data.name = player:get_player_name()
-	elseif type(player) == "table" then
-		if type(player.name) == "string" then
-			data.name = player.name
+	if type(options) == "table" then
+		if type(options.name) == "string" then
+			data.name = options.name
 		end
-		if type(player.position) == "table" then
-			data.position = vector.copy(player.position)
+		if type(options.position) == "table" then
+			data.position = vector.copy(options.position)
 		end
-		if type(player.direction) == "table" then
-			local dir = vector.normalize(player.direction)
+		if type(options.direction) == "table" then
+			local dir = vector.normalize(options.direction)
 			data.pitch = -math.asin(dir.y)
 			data.yaw = math.atan2(-dir.x, dir.z) % (math.pi * 2)
 		end
-		if type(player.controls) == "table" then
+		if type(options.controls) == "table" then
 			data.controls = {}
-			player.controls.dig = player.controls.dig or player.controls.LMB
-			player.controls.place = player.controls.place or player.controls.RMB
 			for name in pairs(player_controls) do
-				data.controls[name] = player.controls[name] == true
+				data.controls[name] = options.controls[name] == true
 			end
+			data.controls.dig = data.controls.dig or options.controls.LMB
+			data.controls.place = data.controls.place or options.controls.RMB
 		end
-		if fakelib.is_metadata(player.metadata) then
-			data.metadata = fakelib.create_metadata(player.metadata)
+		if fakelib.is_metadata(options.metadata) then
+			data.metadata = options.metadata
 		end
-		if fakelib.is_inventory(player.inventory) then
-			data.inventory = player.inventory
+		if fakelib.is_inventory(options.inventory) then
+			data.inventory = options.inventory
 		end
 		local size = 32
-		if data.inventory and type(player.wield_list) == "string" then
-			size = data.inventory:get_size(player.wield_list)
+		if data.inventory and type(options.wield_list) == "string" then
+			size = data.inventory:get_size(options.wield_list)
 			if size > 0 then
-				data.wield_list = player.wield_list
+				data.wield_list = options.wield_list
 			end
 		end
-		if type(player.wield_index) == "number" then
-			if player.wield_index > 0 and player.wield_index <= size then
-				data.wield_index = player.wield_index
+		if type(options.wield_index) == "number" then
+			if options.wield_index > 0 and options.wield_index <= size then
+				data.wield_index = options.wield_index
 			end
 		end
+	elseif type(options) == "string" then
+		data.name = options
 	end
 	return secure_table({data = data}, fake_player, identifier)
 end
