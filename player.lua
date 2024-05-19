@@ -26,10 +26,10 @@ function fakelib.create_player(options)
 		if type(options.name) == "string" then
 			data.name = options.name
 		end
-		if type(options.position) == "table" then
+		if fakelib.is_vector(options.position) then
 			data.position = vector.copy(options.position)
 		end
-		if type(options.direction) == "table" then
+		if fakelib.is_vector(options.direction) then
 			local dir = vector.normalize(options.direction)
 			data.pitch = -math.asin(dir.y)
 			data.yaw = math.atan2(-dir.x, dir.z) % (math.pi * 2)

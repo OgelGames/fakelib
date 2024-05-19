@@ -30,6 +30,8 @@ for _,file in pairs({"metadata", "inventory", "player"}) do
 	loadfile(path.."/"..file..".lua")(check, secure_table)
 end
 
+dofile(path.."/misc.lua")
+
 if minetest.is_singleplayer() then
 	minetest.register_chatcommand("fakelib_test", {
 		description = "Test fakelib's API.",
