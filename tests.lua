@@ -80,6 +80,21 @@ end
 local real_player = minetest.get_player_by_name("singleplayer")
 local fake_player = fakelib.create_player("singleplayer")
 
+-- Type check
+if not fakelib.is_player(real_player) then
+	success = false
+	print("[fakelib] Real player is not a player.")
+end
+if not fakelib.is_player(fake_player) then
+	success = false
+	print("[fakelib] Fake player is not a player.")
+end
+for value in iter_values() do
+	if fakelib.is_player(value) then
+		print(string.format("[fakelib] Value '%s' is a player.", tostring(value)))
+	end
+end
+
 -- Function check
 for func in pairs(getmetatable(real_player)) do
 	if not fake_player[func] then
@@ -121,6 +136,21 @@ end
 
 local real_inv = real_player:get_inventory()
 local fake_inv = fakelib.create_inventory()
+
+-- Type check
+if not fakelib.is_inventory(real_inv) then
+	success = false
+	print("[fakelib] Real inventory is not an inventory.")
+end
+if not fakelib.is_inventory(fake_inv) then
+	success = false
+	print("[fakelib] Fake inventory is not an inventory.")
+end
+for value in iter_values() do
+	if fakelib.is_inventory(value) then
+		print(string.format("[fakelib] Value '%s' is an inventory.", tostring(value)))
+	end
+end
 
 -- Function check
 for func in pairs(getmetatable(real_inv)) do
@@ -196,6 +226,21 @@ real_inv:set_lists(old_inv)
 local real_meta = real_player:get_meta()
 local fake_meta = fakelib.create_metadata()
 
+-- Type check
+if not fakelib.is_metadata(real_meta) then
+	success = false
+	print("[fakelib] Real metadata is not metadata.")
+end
+if not fakelib.is_metadata(fake_meta) then
+	success = false
+	print("[fakelib] Fake metadata is not metadata.")
+end
+for value in iter_values() do
+	if fakelib.is_metadata(value) then
+		print(string.format("[fakelib] Value '%s' is metadata.", tostring(value)))
+	end
+end
+
 -- Function check
 for func in pairs(getmetatable(real_meta)) do
 	if not fake_meta[func] then
@@ -245,6 +290,34 @@ end
 
 -- Reset
 real_meta:from_table(old_meta)
+
+
+-- Misc tests
+------------------------------
+
+local basic_vector = {x = 1, y = 1, z = 1}
+
+-- Vector type check
+if not fakelib.is_vector({x = 1, y = 1, z = 1}) then
+	success = false
+	print("[fakelib] Basic vector is not a vector.")
+end
+if not fakelib.is_vector(vector.new(1, 1, 1)) then
+	success = false
+	print("[fakelib] Vector is not a vector.")
+end
+for value in iter_values() do
+	if fakelib.is_vector(value) then
+		print(string.format("[fakelib] Value '%s' is a vector.", tostring(value)))
+	end
+end
+
+-- Vector metatable
+if fakelib.is_vector(basic_vector, true) then
+	if not basic_vector.add then
+		print("[fakelib] Failed to add vector metatable to basic vector.")
+	end
+end
 
 ------------------------------
 
