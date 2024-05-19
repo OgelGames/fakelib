@@ -19,7 +19,7 @@ function fakelib.create_inventory(sizes)
 	local lists = {}
 	if type(sizes) == "table" then
 		for listname, size in pairs(sizes) do
-			if type(listname) == "string" and type(size) == "number" then
+			if type(listname) == "string" and type(size) == "number" and size > 0 then
 				local list = {}
 				for i=1, size do
 					list[i] = ItemStack()
