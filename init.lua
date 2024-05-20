@@ -32,13 +32,17 @@ end
 
 dofile(path.."/misc.lua")
 
-if minetest.is_singleplayer() then
+-- Tests are not included in releases, so check for them before registering the command.
+
+local tests = loadfile(path.."/tests.lua")
+
+if tests and minetest.is_singleplayer() then
 	minetest.register_chatcommand("fakelib_test", {
 		description = "Test fakelib's API.",
 		params = "[<run error tests>]",
 		func = function(_, param)
 			local start_time = minetest.get_us_time()
-			local success = loadfile(path.."/tests.lua")(param == "true")
+			local success = tests(param == "true")
 			local end_time = minetest.get_us_time()
 			if success then
 				return true, string.format("Testing completed in %i us", end_time - start_time)

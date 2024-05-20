@@ -2,4 +2,5 @@
 * text=auto
 
 # Exclusions for release export.
-* export-ignore
+.* export-ignore
+tests.lua export-ignore
