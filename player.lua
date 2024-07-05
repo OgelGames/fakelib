@@ -441,6 +441,10 @@ function fake_player.hud_get_hotbar_selected_image()
 	return ""
 end
 
+function fake_player.is_valid()
+	return true
+end
+
 -- No-op functions
 ----------------------------------------
 do
