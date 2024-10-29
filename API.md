@@ -59,7 +59,7 @@ Creates a new fake player.
 
 #### **`fakelib.create_inventory([sizes])`**
 
-Creates a new fake player.
+Creates a new fake inventory.
 
 **Arguments**
 
@@ -67,7 +67,7 @@ Creates a new fake player.
 
 #### **`fakelib.create_metadata([data])`**
 
-Creates a new fake player.
+Creates a new fake metadata object.
 
 **Arguments**
 
