@@ -1,5 +1,7 @@
 # API Documentation
 
+This documentation covers the API specific to `fakelib`. For documentation of the functionality provided by the fake player, metatdata and inventory, refer to the [Lua API](https://github.com/minetest/minetest/blob/master/doc/lua_api.md), as they function the same as the real thing.
+
 ## Quick Links
 
 - [`fakelib.is_player(x)`](#fakelibis_playerx)
