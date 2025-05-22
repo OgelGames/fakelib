@@ -139,7 +139,7 @@ function fake_inventory:set_stack(listname, i, stack)
 	stack = ItemStack(stack)
 	i = math.floor(i)
 	local list = self.lists[tostring(listname)]
-	if not list or not list[i] or stack:is_empty() then
+	if not list or not list[i] then
 		return false
 	end
 	list[i] = stack
