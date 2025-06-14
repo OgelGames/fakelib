@@ -141,6 +141,8 @@ function fake_player:get_player_control()
 	end
 	controls.LMB = controls.dig
 	controls.RMB = controls.place
+	controls.movement_x = 0
+	controls.movement_y = 0
 	return controls
 end
 
@@ -236,6 +238,10 @@ function fake_player.get_breath()
 	return 10
 end
 
+function fake_player.get_camera()
+	return {mode = "any"}
+end
+
 function fake_player.get_children()
 	return {}
 end
@@ -253,6 +259,14 @@ end
 
 function fake_player.get_eye_offset()
 	return vector.zero(), vector.zero(), vector.zero()
+end
+
+function fake_player.get_flags()
+	return {
+		breathing = true,
+		drowning = true,
+		node_damage = true,
+	}
 end
 
 function fake_player.get_formspec_prepend()
@@ -457,15 +471,17 @@ do
 		"settexturemod", "setvelocity", "setyaw",
 		-- Non-functional get/set functions
 		"add_velocity", "get_attach", "get_attribute", "get_day_night_ratio",
+		"get_observers", "get_effective_observers",
 		"hud_add", "hud_change", "hud_get", "hud_remove", "hud_set_flags",
 		"hud_set_hotbar_image", "hud_set_hotbar_itemcount",
 		"hud_set_hotbar_selected_image", "override_day_night_ratio",
 		"set_animation", "set_animation_frame_speed", "set_armor_groups",
 		"set_attach", "set_attribute", "set_bone_override", "set_bone_position",
-		"set_breath", "set_clouds", "set_detach", "set_eye_offset",
-		"set_formspec_prepend", "set_fov", "set_hp", "set_inventory_formspec",
-		"set_lighting", "set_local_animation", "set_minimap_modes", "set_moon",
-		"set_nametag_attributes", "set_physics_override",
+		"set_breath", "set_camera", "set_clouds", "set_detach",
+		"set_eye_offset", "set_formspec_prepend", "set_flags", "set_fov",
+		"set_hp", "set_inventory_formspec", "set_lighting",
+		"set_local_animation", "set_minimap_modes", "set_moon",
+		"set_nametag_attributes", "set_observers", "set_physics_override",
 		"set_properties", "set_sky", "set_stars", "set_sun",
 		-- Other functions that do nothing
 		"punch", "respawn", "right_click", "send_mapblock",
