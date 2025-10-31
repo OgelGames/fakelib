@@ -82,11 +82,22 @@ local function check_vector(v)
 	end
 end
 
+local function new_fake_guid()
+	return string.format("@fakeplayer%d%d", os.time(), math.random(100, 999))
+end
+
 -- Dynamic get/set functions
 ----------------------------------------
 
 function fake_player:get_player_name()
 	return self.data.name or ""
+end
+
+function fake_player:get_guid()
+	if not self.data.guid then
+		self.data.guid = new_fake_guid()
+	end
+	return self.data.guid
 end
 
 function fake_player:get_inventory()
