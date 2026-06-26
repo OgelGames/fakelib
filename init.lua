@@ -32,6 +32,9 @@ end
 
 dofile(path.."/misc.lua")
 
+-- Override `core.is_player()` so only real players and fakelib's fake players will pass.
+core.is_player = fakelib.is_player
+
 -- Tests are not included in releases, so check for them before registering the command.
 
 local tests = loadfile(path.."/tests.lua")
