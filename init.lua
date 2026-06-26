@@ -24,7 +24,7 @@ local function secure_table(t, index, id)
 	return t
 end
 
-local path = minetest.get_modpath("fakelib")
+local path = core.get_modpath("fakelib")
 
 for _,file in pairs({"metadata", "inventory", "player"}) do
 	loadfile(path.."/"..file..".lua")(check, secure_table)
@@ -39,14 +39,14 @@ core.is_player = fakelib.is_player
 
 local tests = loadfile(path.."/tests.lua")
 
-if tests and minetest.is_singleplayer() then
-	minetest.register_chatcommand("fakelib_test", {
+if tests and core.is_singleplayer() then
+	core.register_chatcommand("fakelib_test", {
 		description = "Test fakelib's API.",
 		params = "[<run error tests>]",
 		func = function(_, param)
-			local start_time = minetest.get_us_time()
+			local start_time = core.get_us_time()
 			local success = tests(param == "true")
-			local end_time = minetest.get_us_time()
+			local end_time = core.get_us_time()
 			if success then
 				return true, string.format("Testing completed in %i us", end_time - start_time)
 			end

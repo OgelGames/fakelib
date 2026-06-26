@@ -77,7 +77,7 @@ end
 -- Player tests
 ------------------------------
 
-local real_player = minetest.get_player_by_name("singleplayer")
+local real_player = core.get_player_by_name("singleplayer")
 local fake_player = fakelib.create_player("singleplayer")
 
 -- Type check
