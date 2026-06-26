@@ -1,10 +1,11 @@
 
 globals = {
 	"fakelib",
+	"core.is_player",
 }
 
 read_globals = {
-	"minetest",
+	"core",
 	"dump",
 	"table.copy",
 	"ItemStack",
