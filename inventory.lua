@@ -160,7 +160,8 @@ function fake_inventory:set_list(listname, list)
 		return
 	end
 	check(2, list, "table")
-	local new_list, size = {}, 0
+	local new_list = {}
+	local size = self.lists[listname] and #self.lists[listname] or 0
 	for i,s in pairs(list) do
 		check(4, i, "number")
 		if i > size then
